@@ -1,0 +1,85 @@
+{
+    "name": "aui-image-editor",
+    "builds": {
+        "aui-image-editor": {
+            "jsfiles": [
+                "aui-image-editor.js"
+            ]
+        },
+        "aui-image-editor-base": {
+            "jsfiles": [
+                "aui-image-editor-base.js"
+            ]
+        },
+        "aui-image-filter": {
+            "jsfiles": [
+                "filters/aui-image-filter-base.js"
+            ]
+        },
+        "aui-image-color-filter-base": {
+            "jsfiles": [
+                "filters/aui-image-filter-color.js"
+            ]
+        },
+        "aui-image-filter-adjust": {
+            "jsfiles": [
+                "filters/aui-image-filter-adjust.js"
+            ]
+        },
+        "aui-image-filter-grayscale": {
+            "jsfiles": [
+                "filters/aui-image-filter-grayscale.js"
+            ]
+        },
+        "aui-image-filter-invert": {
+            "jsfiles": [
+                "filters/aui-image-filter-invert.js"
+            ]
+        },
+        "aui-image-filter-polaroid": {
+            "jsfiles": [
+                "filters/aui-image-filter-polaroid.js"
+            ]
+        },
+        "aui-image-filter-sepia": {
+            "jsfiles": [
+                "filters/aui-image-filter-sepia.js"
+            ]
+        },
+        "aui-image-blur-filter": {
+            "jsfiles": [
+                "filters/aui-image-filter-blur.js"
+            ]
+        },
+        "aui-image-scale-filter": {
+            "jsfiles": [
+                "filters/aui-image-filter-scale.js"
+            ]
+        },
+        "aui-image-editor-canvas": {
+            "jsfiles": [
+                "aui-image-editor-canvas.js"
+            ]
+        },
+        "aui-image-editor-canvas-default": {
+            "jsfiles": [
+                "aui-image-editor-canvas-default.js"
+            ]
+        },
+        "aui-image-editor-swf": {
+            "jsfiles": [
+                "aui-image-editor-swf.js"
+            ]
+        },
+        "aui-image-editor-swf-default": {
+            "jsfiles": [
+                "aui-image-editor-swf-default.js"
+            ]
+        },
+        "aui-image-editor-action": {
+            "jsfiles": [
+                "aui-image-editor-action.js"
+            ]
+        }
+    }
+}

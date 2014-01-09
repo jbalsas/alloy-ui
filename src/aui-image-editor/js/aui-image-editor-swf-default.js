@@ -1,0 +1,1 @@
+A.ImageEditorBase = A.ImageEditorSwf;
