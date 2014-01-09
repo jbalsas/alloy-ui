@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../../build/aui-css/css/bootstrap.css">
+        <script src="../../build/aui/aui.js"></script>
+    </head>
+
+    <body class="yui3-skin-sam">
+        <h1>Alloy - ImageEditor Demo</h1>
+
+        <div>
+            <button id="getImageData">GetImageData</button>
+        </div>
+
+        <div id="imageContainer">
+            <img src="assets/mountain.jpg" ></img>
+            <div class="toolbar hide">
+                <div class="btn-group btn-group-radio">
+                    <button class="btn btn-default" data-action="elements"><span class="glyphicon glyphicon-adjust"></span></button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var i, positions = [];
+
+            var randomizePositions = function() {
+                for (i = 0; i < 100; i++) {
+                    positions[i] = {
+                        x: Math.random(),
+                        y: Math.random(),
+                        size: Math.random()
+                    }
+                }
+            };
+
+            randomizePositions();
+
+            cloud = new Image();
+            cloud.src = 'assets/cloud.png';
+
+            var addClouds = function(drawingContext, value, callback) {
+                var x, y, s;
+
+                for (i = 0; i < value; i++) {
+                    x = positions[i].x*drawingContext.bitmapData.width;
+                    y = positions[i].y*(drawingContext.bitmapData.height - 200);
+                    s = positions[i].size;
+                    drawingContext.renderingContext.drawImage(cloud, x, y, cloud.width * s, cloud.height * s);
+                }
+            };
+
+            flower = new Image();
+            flower.src = 'assets/flower.png';
+
+            var addFlowers = function(drawingContext, value, callback) {
+                var x, y, s;
+
+                for (i = 0; i < value; i++) {
+                    x = positions[i].x*drawingContext.bitmapData.width;
+                    y = (drawingContext.bitmapData.height - 200) + positions[i].y*(drawingContext.bitmapData.height-200);
+                    s = positions[i].size;
+                    drawingContext.renderingContext.drawImage(flower, x, y, flower.width * s, flower.height * s);
+                }
+            };
+
+            YUI({filter:'raw'/*, defaultImageEditorEngine: 'flash'*/}).use('aui-image-editor', 'slider', function(Y) {
+                    var imageEditor = new Y.ImageEditor({
+                        srcNode: '#imageContainer',
+                        processors: {
+                            'elements': {
+                                'clouds': {
+                                    process: addClouds,
+                                    ui: {
+                                        fn: Y.Slider
+                                    }
+                                },
+                                'flowers': {
+                                    process: addFlowers,
+                                    ui: {
+                                        fn: Y.Slider
+                                    }
+                                }
+                            }
+                        },
+                        on: {
+                            'imageProcessor:save': function(event) {
+                                randomizePositions();
+                            }
+                        }
+                    }).render();
+
+                    Y.one('#getImageData').on('click', function(event) {
+                        window.open(imageEditor.getImageData());
+                    });
+                }
+            );
+        </script>
+    </body>
+</html>

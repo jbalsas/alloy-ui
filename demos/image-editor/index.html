@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../../build/aui-css/css/bootstrap.css">
+        <script src="../../build/aui/aui.js"></script>
+    </head>
+
+    <body class="yui3-skin-sam">
+        <h1>Alloy - ImageEditor Demo</h1>
+
+        <div>
+            <button id="getImageData">GetImageData</button>
+        </div>
+
+        <div id="imageContainer">
+            <img src="assets/lfr-soccer-1.jpg" ></img>
+        </div>
+
+        <script>
+            YUI({filter:'raw'/*, defaultImageEditorEngine: 'flash'*/}).use('aui-image-editor', function(Y) {
+                    var imageEditor = new Y.ImageEditor({
+                        srcNode: '#imageContainer'
+                    }).render();
+
+                    Y.one('#getImageData').on('click', function(event) {
+                        window.open(imageEditor.getImageData());
+                    });
+                }
+            );
+        </script>
+    </body>
+</html>
