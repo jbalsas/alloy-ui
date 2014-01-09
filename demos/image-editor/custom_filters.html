@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="../../build/aui-css/css/bootstrap.css">
+        <script src="../../build/aui/aui.js"></script>
+        <script src="js/caman.full.js"></script>
+    </head>
+
+    <body class="yui3-skin-sam">
+        <div id="wrapper">
+            <h1>Alloy - ImageEditor Demo</h1>
+            <div id="actionsToolbar">
+                <button id="getImageData">GetImageData</button>
+            </div>
+            <div id="test">
+                <img src="assets/lfr-soccer-1.jpg" ></img>
+                <div class="toolbar">
+                    <div class="btn-group">
+                        <button class="btn" data-action="undo"><i class="icon-arrow-left"></i></button>
+                        <button class="btn" data-action="redo"><i class="icon-arrow-right"></i></button>
+                    </div>
+                    <button class="btn" data-action="reset"><i class="icon-trash"></i></button>
+                    <div class="btn-group btn-group-radio">
+                        <button class="btn" data-action="adjust"><i class="icon-adjust"></i></button>
+                        <button class="btn" data-action="filters"><i class="icon-picture"></i></button>
+                        <button class="btn" data-action="caman"><i class="icon-camera"></i></button>
+                        <button class="btn" data-action="flash"><i class="icon-fire"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var imageEditor;
+
+            var camanHue = function(drawingContext, value, callback) {
+                if (value) {
+                    drawingContext.statusNode.setHTML('CamanJS -> Hue(' + value + ')');
+
+                    Caman(drawingContext.renderingCanvas, function() {
+                        this.reloadCanvasData();
+                        this.hue(value).render();
+                        callback();
+                    });
+                }
+            };
+
+            var camanNostalgia = function(drawingContext, value, callback) {
+                var i = 0;
+
+                var c = Caman(drawingContext.renderingCanvas, function() {
+                    this.reloadCanvasData();
+                    this.nostalgia().render();
+                });
+
+                Caman.Event.listen(c, 'processStart', function(job) {
+                    drawingContext.statusNode.setHTML('Applying ' + job.name + '...');
+                });
+
+                Caman.Event.listen('renderFinished', function() {
+                    drawingContext.statusNode.setHTML('CamanJS -> Nostalgia');
+                    callback();
+                });
+            }
+
+            var camanColorize = function(drawingContext, value, callback) {
+                if (value) {
+                    Caman(drawingContext.renderingCanvas, function() {
+                        this.reloadCanvasData();
+                        this.colorize(value, 20).render();
+                        callback();
+                    });
+                }
+            }
+
+            YUI({ filter:'raw'/*, defaultImageEditorEngine: 'flash' */}).use('aui-image-editor', 'slider', 'dial', 'aui-color-palette', 'aui-hsva-palette', 'aui-image-cropper', function(Y) {
+                    imageEditor = new Y.ImageEditor({
+                        srcNode: '#test',
+                        processors: {
+                            'caman': {
+                                'hue': {
+                                    async: true,
+                                    process: camanHue,
+                                    ui: new Y.Dial()
+                                },
+                                'colorize': {
+                                    async: true,
+                                    process: camanColorize,
+                                    ui: {
+                                        fn: Y.HSVPalette,
+                                        cfg: {
+                                            alpha: false,
+                                            controls: false,
+                                            on: {
+                                                selectedChange: function(event) {
+                                                    this.fire('valueChange', {newVal: event.newVal});
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                'nostalgia': {
+                                    async: true,
+                                    process: camanNostalgia
+                                }
+                            },
+                            'flash': {
+                                'infrared': {
+                                    swfCfg: {
+                                        className: 'Processing',
+                                        path: 'as/Processing.swf',
+                                        processFn: 'infrared',
+                                        static: false
+                                    }
+                                },
+                                'gammaCorrection': {
+                                    swfCfg: {
+                                        className: 'Processing',
+                                        path: 'as/Processing.swf',
+                                        processFn: 'gammaCorrection',
+                                        static: true
+                                    }
+                                },
+                                'extract': {
+                                    ui: {
+                                        fn: Y.HSVPalette,
+                                        cfg: {
+                                            alpha: false,
+                                            controls: false,
+                                            on: {
+                                                selectedChange: function(event) {
+                                                    this.fire('valueChange', {newVal: event.newVal});
+                                                }
+                                            }
+                                        }
+                                    },
+                                    swfCfg: {
+                                        className: 'com.custom.CustomProcessing',
+                                        path: 'as/Processing.swf',
+                                        processFn: 'extract',
+                                        static: false
+                                    }
+                                },
+                                'blur': {
+                                    ui: { fn: Y.Dial },
+                                    swfCfg: {
+                                        className: 'com.custom.CustomProcessing',
+                                        path: 'as/Processing.swf',
+                                        processFn: 'blur',
+                                        static: true
+                                    }
+                                }
+                            },
+                            'adjust': {
+                                'brightness': new Y.ImageAdjustFilter({mode: 'brightness'}),
+                                'contrast': new Y.ImageAdjustFilter({mode: 'contrast'}),
+                                'saturation': new Y.ImageAdjustFilter({mode: 'saturation'})
+                            },
+                            'filters': {
+                                'grayscale': new Y.ImageGrayscaleFilter(),
+                                'sepia': new Y.ImageSepiaFilter(),
+                                'polaroid': new Y.ImagePolaroidFilter(),
+                                'invert': new Y.ImageInvertFilter()
+                            }
+                        }
+                    }).render();
+
+                    Y.one('#getImageData').on('click', function(event) {
+                        console.log(imageEditor.getImageData());
+                    });
+                }
+            );
+        </script>
+    </body>
+</html>
