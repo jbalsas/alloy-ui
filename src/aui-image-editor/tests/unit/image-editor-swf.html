@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <title>AUI ImageEditor Unit Tests</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="../../../../build/aui-css/css/bootstrap.css">
+    <script src="../../../../build/aui/aui.js"></script>
+
+    <script src="js/resemble.js"></script>
+    <script src="js/tests.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+    <div id="logger"></div>
+
+    <div id="wrapper">
+    </div>
+
+    <table class="table table-hover table-striped">
+        <thead>
+                <tr>
+                    <th>Error</th>
+                    <th>Result</th>
+                    <th>Expected</th>
+                    <th>Differences</th>
+                    <th>Difference (%)</th>
+                </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div id="imagesCache" style="display:none;">
+        <img src="assets/AlloyUI.png"></img>
+        <img src="assets/AlloyUI_flip_h.png"></img>
+        <img src="assets/AlloyUI_flip_v.png"></img>
+        <img src="assets/AlloyUI_gray.png"></img>
+        <img src="assets/AlloyUI_invert.png"></img>
+        <img src="assets/AlloyUI_sepia.png"></img>
+    </div>
+
+    <script>
+        YUI({
+            coverage: ['aui-image-editor'],
+            filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
+            defaultImageEditorEngine: 'flash'
+        }).use('test-console', 'test', 'module-tests', function(Y) {
+
+            (new Y.Test.Console()).render('#logger');
+
+            Y.Test.Runner.setName('aui-image-editor');
+            Y.Test.Runner.run();
+        });
+    </script>
+    </body>
+</html>
