@@ -53,20 +53,112 @@ add('load', '5', {
 },
     "trigger": "aui-event-base"
 });
-// aui-image-viewer-multiple-swipe
+// aui-image-editor-canvas
 add('load', '6', {
+    "name": "aui-image-editor-canvas",
+    "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('supports', 'canvas') === undefined) {
+        addFeature('supports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return !useFlash && (canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('supports', 'canvas');
+},
+    "trigger": "aui-image-editor-base"
+});
+// aui-image-editor-canvas-default
+add('load', '7', {
+    "name": "aui-image-editor-canvas-default",
+    "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('supports', 'canvas') === undefined) {
+        addFeature('supports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return !useFlash && (canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('supports', 'canvas');
+},
+    "trigger": "aui-image-editor-base"
+});
+// aui-image-editor-swf
+add('load', '8', {
+    "name": "aui-image-editor-swf",
+    "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('notsupports', 'canvas') === undefined) {
+        addFeature('notsupports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return useFlash || !(canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('notsupports', 'canvas');
+},
+    "trigger": "aui-image-editor-base"
+});
+// aui-image-editor-swf-default
+add('load', '9', {
+    "name": "aui-image-editor-swf-default",
+    "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('notsupports', 'canvas') === undefined) {
+        addFeature('notsupports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return useFlash || !(canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('notsupports', 'canvas');
+},
+    "trigger": "aui-image-editor-base"
+});
+// aui-image-viewer-multiple-swipe
+add('load', '10', {
     "name": "aui-image-viewer-multiple-swipe",
     "trigger": "aui-image-viewer-multiple",
     "ua": "touchEnabled"
 });
 // aui-image-viewer-swipe
-add('load', '7', {
+add('load', '11', {
     "name": "aui-image-viewer-swipe",
     "trigger": "aui-image-viewer-base",
     "ua": "touchEnabled"
 });
 // aui-modal-resize
-add('load', '8', {
+add('load', '12', {
     "name": "aui-modal-resize",
     "test": function(A) {
     return !A.UA.mobile;
@@ -74,13 +166,13 @@ add('load', '8', {
     "trigger": "aui-modal"
 });
 // aui-node-html5
-add('load', '9', {
+add('load', '13', {
     "name": "aui-node-html5",
     "trigger": "aui-node",
     "ua": "ie"
 });
 // aui-scheduler-touch
-add('load', '10', {
+add('load', '14', {
     "name": "aui-scheduler-touch",
     "trigger": "aui-scheduler",
     "ua": "touchEnabled"

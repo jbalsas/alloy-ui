@@ -36,7 +36,7 @@ var Lang = A.Lang,
      *
      * @class A.ImageEditorBase
      */
-    ImageEditor = A.Base.create(_NAME, A.Modal, [A.ImageEditorBase, A.WidgetCssClass, A.WidgetToggle], {
+    ImageEditor = A.Base.create(_NAME, A.Widget, [A.ImageEditorBase, A.WidgetCssClass], {
 
         CLOSE_NODE_TPL: '<button class="btn btn-close btn-default" data-action="close">' +
             '<span class="glyphicon glyphicon-remove"></span>' +
@@ -81,9 +81,6 @@ var Lang = A.Lang,
             var instance = this,
                 processors;
 
-            instance.after('render', instance._renderEditor, instance);
-
-                /*
             processors = instance.get(STR_PROCESSORS);
 
             if (!processors) {
@@ -93,11 +90,6 @@ var Lang = A.Lang,
             }
 
             instance._actions = instance._getAvailableActions(processors);
-            */
-        },
-
-        _renderEditor: function() {
-            debugger;
         },
 
         /**
@@ -106,7 +98,6 @@ var Lang = A.Lang,
          * @method renderUI
          * @protected
          */
-        /*
         renderUI: function() {
             var instance = this,
                 processorsNode,
@@ -152,14 +143,13 @@ var Lang = A.Lang,
             instance._toolbarNode = toolbarNode;
             instance._triggerNode = triggerNode;
         },
-*/
+
         /**
          * Bind the events on the ImageEditor UI. Lifecycle.
          *
          * @method bindUI
          * @protected
          */
-        /*
         bindUI: function() {
             var instance = this,
                 boundingBox,
@@ -193,9 +183,7 @@ var Lang = A.Lang,
 
             instance._eventHandles = eventHandles;
         },
-        */
 
-/*
         close: function() {
             var instance = this;
 
@@ -212,8 +200,7 @@ var Lang = A.Lang,
 
             instance._triggerNode.show();
         },
-        */
-/*
+
         _handleAction: function(event) {
             var instance = this,
                 action;
@@ -235,7 +222,7 @@ var Lang = A.Lang,
             boundingBox.one('[data-action=reset]').set('disabled', !instance._undoManager.canUndo());
             boundingBox.one('[data-action=redo]').set('disabled', !instance._undoManager.canRedo());
         },
-*/
+
         /**
          * Destructor lifecycle implementation for the `HSVPalette` class.
          * Lifecycle.
@@ -640,26 +627,6 @@ var Lang = A.Lang,
          * @static
          */
         ATTRS: {
-
-            centered: {
-                value: true
-            },
-
-            modal: {
-                value: true
-            },
-
-            visible: {
-                value: false
-            },
-
-            bodyContent: {
-                value: 'asdajlds aslkdj alsdkj asd'
-            },
-
-            headerContent: {
-                value: '<h3>laksjd lakjd lk</h3>'
-            },
 
             /**
              * DOM node for the processors' User Interface.

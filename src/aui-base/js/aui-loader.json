@@ -660,6 +660,25 @@
         ],
         "skinnable": true
     },
+    "aui-image-blur-filter": {
+        "requires": [
+            "aui-image-filter"
+        ]
+    },
+    "aui-image-color-filter": {
+        "requires": [
+            "aui-image-filter-adjust",
+            "aui-image-filter-grayscale",
+            "aui-image-filter-invert",
+            "aui-image-filter-polaroid",
+            "aui-image-filter-sepia"
+        ]
+    },
+    "aui-image-color-filter-base": {
+        "requires": [
+            "aui-image-filter"
+        ]
+    },
     "aui-image-cropper": {
         "requires": [
             "resize-base",
@@ -669,6 +688,101 @@
             "aui-component"
         ],
         "skinnable": true
+    },
+    "aui-image-editor": {
+        "requires": [
+            "aui-image-editor-base",
+            "aui-modal",
+            "aui-toolbar"
+        ],
+        "skinnable": true
+    },
+    "aui-image-editor-action": {
+        "requires": [
+            "aui-component"
+        ]
+    },
+    "aui-image-editor-base": {
+        "requires": [
+            "aui-image-color-filter-base",
+            "aui-image-filter-adjust",
+            "aui-image-filter-grayscale",
+            "aui-image-filter-invert",
+            "aui-image-filter-polaroid",
+            "aui-image-filter-sepia",
+            "aui-image-blur-filter",
+            "aui-image-scale-filter",
+            "aui-widget-cssclass",
+            "aui-widget-toggle",
+            "timers"
+        ]
+    },
+    "aui-image-editor-canvas": {
+        "condition": {
+            "name": "aui-image-editor-canvas",
+            "test": "aui-image-editor-canvas-test.js",
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-editor-canvas-default": {
+        "condition": {
+            "name": "aui-image-editor-canvas-default",
+            "test": "aui-image-editor-canvas-test.js",
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-editor-swf": {
+        "condition": {
+            "name": "aui-image-editor-swf",
+            "test": "aui-image-editor-swf-test.js",
+            "trigger": "aui-image-editor-base"
+        },
+        "requires": [
+            "querystring-stringify-simple"
+        ]
+    },
+    "aui-image-editor-swf-default": {
+        "condition": {
+            "name": "aui-image-editor-swf-default",
+            "test": "aui-image-editor-swf-test.js",
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-filter": {
+        "requires": [
+            "aui-component"
+        ]
+    },
+    "aui-image-filter-adjust": {
+        "requires": [
+            "aui-image-color-filter-base",
+            "slider"
+        ]
+    },
+    "aui-image-filter-grayscale": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-invert": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-polaroid": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-sepia": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-scale-filter": {
+        "requires": [
+            "aui-image-filter"
+        ]
     },
     "aui-image-viewer": {
         "requires": [

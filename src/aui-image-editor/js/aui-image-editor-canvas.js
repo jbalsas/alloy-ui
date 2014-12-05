@@ -20,6 +20,7 @@ var Lang = A.Lang,
          *
          * @protected
          */
+        /*
         initializer: function() {
             var instance = this,
                 canvas,
@@ -55,6 +56,7 @@ var Lang = A.Lang,
                 instance._previewData = instance._cloneImageData(instance._initialData);
             }
         },
+        */
 
         /**
          * Discards any unsaved changes on the editor.
@@ -125,8 +127,7 @@ var Lang = A.Lang,
                     {
                         bitmapData: instance._previewData,
                         renderingCanvas: instance._canvas,
-                        renderingContext: instance._ctx,
-                        statusNode: instance._processorInfo
+                        renderingContext: instance._ctx
                     },
                     cfg,
                     A.bind('_onProcessComplete', instance, bitmap, callback)

@@ -2,6 +2,7 @@
     "aui-image-editor": {
         "requires": [
             "aui-image-editor-base",
+            "aui-modal",
             "aui-toolbar"
         ],
         "skinnable": true
@@ -16,6 +17,8 @@
             "aui-image-filter-sepia",
             "aui-image-blur-filter",
             "aui-image-scale-filter",
+            "aui-widget-cssclass",
+            "aui-widget-toggle",
             "timers"
         ],
         "plugins": {

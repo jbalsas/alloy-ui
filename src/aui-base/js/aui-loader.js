@@ -686,6 +686,25 @@ Y.mix(YUI.Env[Y.version].modules, {
         ],
         "skinnable": true
     },
+    "aui-image-blur-filter": {
+        "requires": [
+            "aui-image-filter"
+        ]
+    },
+    "aui-image-color-filter": {
+        "requires": [
+            "aui-image-filter-adjust",
+            "aui-image-filter-grayscale",
+            "aui-image-filter-invert",
+            "aui-image-filter-polaroid",
+            "aui-image-filter-sepia"
+        ]
+    },
+    "aui-image-color-filter-base": {
+        "requires": [
+            "aui-image-filter"
+        ]
+    },
     "aui-image-cropper": {
         "requires": [
             "resize-base",
@@ -695,6 +714,169 @@ Y.mix(YUI.Env[Y.version].modules, {
             "aui-component"
         ],
         "skinnable": true
+    },
+    "aui-image-editor": {
+        "requires": [
+            "aui-image-editor-base",
+            "aui-modal",
+            "aui-toolbar"
+        ],
+        "skinnable": true
+    },
+    "aui-image-editor-action": {
+        "requires": [
+            "aui-component"
+        ]
+    },
+    "aui-image-editor-base": {
+        "requires": [
+            "aui-image-color-filter-base",
+            "aui-image-filter-adjust",
+            "aui-image-filter-grayscale",
+            "aui-image-filter-invert",
+            "aui-image-filter-polaroid",
+            "aui-image-filter-sepia",
+            "aui-image-blur-filter",
+            "aui-image-scale-filter",
+            "aui-widget-cssclass",
+            "aui-widget-toggle",
+            "timers"
+        ]
+    },
+    "aui-image-editor-canvas": {
+        "condition": {
+            "name": "aui-image-editor-canvas",
+            "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('supports', 'canvas') === undefined) {
+        addFeature('supports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return !useFlash && (canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('supports', 'canvas');
+},
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-editor-canvas-default": {
+        "condition": {
+            "name": "aui-image-editor-canvas-default",
+            "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('supports', 'canvas') === undefined) {
+        addFeature('supports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return !useFlash && (canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('supports', 'canvas');
+},
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-editor-swf": {
+        "condition": {
+            "name": "aui-image-editor-swf",
+            "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('notsupports', 'canvas') === undefined) {
+        addFeature('notsupports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return useFlash || !(canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('notsupports', 'canvas');
+},
+            "trigger": "aui-image-editor-base"
+        },
+        "requires": [
+            "querystring-stringify-simple"
+        ]
+    },
+    "aui-image-editor-swf-default": {
+        "condition": {
+            "name": "aui-image-editor-swf-default",
+            "test": function(A) {
+    var DOCUMENT = A.config.doc,
+        testFeature = A.Features.test,
+        addFeature = A.Features.add;
+
+    if (testFeature('notsupports', 'canvas') === undefined) {
+        addFeature('notsupports', 'canvas', {
+            test: function() {
+                var canvas = DOCUMENT && DOCUMENT.createElement('canvas'),
+                    useFlash = Y.config.defaultImageEditorEngine && Y.config.defaultImageEditorEngine == 'flash';
+
+                return useFlash || !(canvas && canvas.getContext && canvas.getContext('2d'));
+            }
+        });
+    }
+
+    return testFeature('notsupports', 'canvas');
+},
+            "trigger": "aui-image-editor-base"
+        }
+    },
+    "aui-image-filter": {
+        "requires": [
+            "aui-component"
+        ]
+    },
+    "aui-image-filter-adjust": {
+        "requires": [
+            "aui-image-color-filter-base",
+            "slider"
+        ]
+    },
+    "aui-image-filter-grayscale": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-invert": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-polaroid": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-filter-sepia": {
+        "requires": [
+            "aui-image-color-filter-base"
+        ]
+    },
+    "aui-image-scale-filter": {
+        "requires": [
+            "aui-image-filter"
+        ]
     },
     "aui-image-viewer": {
         "requires": [
@@ -1453,4 +1635,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'c020db367f734a7c67833f6c4f421666';
+YUI.Env[Y.version].md5 = 'f17339ce3b6cfb83a405605e27d60c79';

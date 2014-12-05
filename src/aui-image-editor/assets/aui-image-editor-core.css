@@ -1,37 +1,57 @@
-.yui3-image-editor {
-    display: inline-block;
-    position: relative;
-}
-
 .yui3-image-editor canvas {
     display: block;
     position: absolute;
     top: 0;
 }
 
-.yui3-image-editor .image-editor-processors, .yui3-image-editor .image-editor-toolbar {
-    bottom: 0;
+.yui3-image-editor .toolbar {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.yui3-image-editor .toolbar button {
+    margin-right: 5px;
+}
+
+.yui3-image-editor .toolbar.toolbar-status {
+    top: 10px;
+}
+
+.yui3-image-editor .toolbar.toolbar-actions {
+    bottom: 10px;
+}
+
+.yui3-image-editor .trigger {
+    bottom: 10px;
+    right: 10px;
+    position: absolute;
+}
+
+.yui3-image-editor .btn-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.yui3-image-editor .processors .toolbar-processors {
+    position: relative;
+}
+
+.yui3-image-editor .processors {
+    bottom: 10px;
     position: absolute;
     width: 100%;
 }
 
-.yui3-image-editor .image-editor-processors .image-processor-status {
-    background-color: #000000;
-    background-color: rgba(0, 0, 0, 0.4);
-    color: #FFFFFF;
-    margin: 0;
+.yui3-image-editor .processors .ui {
+    margin: 10px 0;
 }
 
-.yui3-image-editor .image-processor-info, .yui3-image-editor .image-processor-widgets {
+.yui3-image-editor .processors .widgets {
     text-align: center;
 }
 
 .yui3-image-editor .image-processor-swf {
-    position: absolute;
-}
-
-.yui3-image-editor .image-editor-trigger-default, .yui3-image-editor .toolbar {
-    bottom: 10px;
-    left: 10px;
     position: absolute;
 }

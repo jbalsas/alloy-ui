@@ -171,14 +171,6 @@ ImageEditorBase.prototype = {
 
         eventName = 'imageProcessor:' + state;
 
-        instance.fire(
-           eventName,
-           {
-               newVal: newVal,
-               prevVal: prevVal
-           }
-        );
-
         if (instance._undoManager && state === 'save') {
             instance._undoManager.add(
                 new A.ImageEditorAction(
@@ -190,6 +182,14 @@ ImageEditorBase.prototype = {
                 )
             );
         }
+
+        instance.fire(
+           eventName,
+           {
+               newVal: newVal,
+               prevVal: prevVal
+           }
+        );
     },
 
     undo: function() {
@@ -198,6 +198,8 @@ ImageEditorBase.prototype = {
         if (instance._undoManager) {
             instance._undoManager.undo();
         }
+
+        instance.fire('imageProcessor:save');
     },
 
     redo: function() {
@@ -206,6 +208,8 @@ ImageEditorBase.prototype = {
         if (instance._undoManager) {
             instance._undoManager.redo();
         }
+
+        instance.fire('imageProcessor:save');
     }
 
 };
