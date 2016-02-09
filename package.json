@@ -1,7 +1,7 @@
 {
   "name": "alloy",
   "description": "AlloyUI",
-  "version": "3.0.3-deprecated.11",
+  "version": "3.0.3-deprecated.12",
   "author": {
     "name": "Eduardo Lundgren",
     "email": "eduardo.lundgren@liferay.com",
@@ -32,6 +32,7 @@
     "gulp-insert": "~0.4.0",
     "gulp-jsbeautifier": "~0.0.2",
     "gulp-jshint": "^1.8.4",
+    "gulp-maven-deploy": "^0.2.0",
     "gulp-prompt": "~0.1.1",
     "gulp-replace": "^0.5.2",
     "gulp-util": "^3.0.1",
